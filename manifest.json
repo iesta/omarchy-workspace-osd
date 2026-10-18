@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "iesta.workspace-osd",
+  "name": "Workspace OSD",
+  "version": "1.1.0",
+  "author": "iesta",
+  "description": "Giant on-screen workspace number when the active workspace changes",
+  "kinds": [
+    "panel"
+  ],
+  "keepLoaded": true,
+  "entryPoints": {
+    "panel": "WorkspaceOsd.qml"
+  }
+}
