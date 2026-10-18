@@ -4,9 +4,13 @@ A giant, theme-aware number that flashes in the center of the screen whenever
 the active Hyprland workspace changes — for [Omarchy](https://omarchy.org/)
 (Quickshell) on Arch Linux.
 
-It replaces the usual tiny OSD with a large number, and is fully configurable
-from a settings panel: on-screen time, fade, size, opacity, **shape**
-(rectangle / rounded / circle) and **border**.
+Omarchy ships **no** built-in workspace-number OSD (its `omarchy.osd` panel only
+covers volume/brightness, and workspace numbers otherwise live in the bar). This
+plugin adds a large centered overlay instead — and **no bar icon**: it is a
+standalone `panel`, so it works even when the Omarchy bar is hidden.
+
+Fully configurable from a settings panel: on-screen time, fade, size, opacity,
+**shape** (rectangle / rounded / circle) and **border**.
 
 ## Preview
 
@@ -15,6 +19,8 @@ from a settings panel: on-screen time, fade, size, opacity, **shape**
 ## Features
 
 - Large centered workspace number on every workspace change.
+- **No bar icon / no bar footprint** — a standalone overlay, not a bar widget;
+  works even if you hide the Omarchy bar.
 - Theme-aware: uses the active Omarchy theme (`Color.accent` for the number,
   `Color.background` for the card, `popups.border` for the outline). Switches
   live with the theme.
@@ -46,18 +52,31 @@ omarchy restart shell
 
 ## Usage
 
-The OSD shows automatically. To open its settings:
+The OSD appears automatically on every workspace change — there is nothing to
+click and **no bar icon** (it runs as a standalone overlay, even with the bar
+hidden).
+
+### Open the preferences
+
+From the Omarchy menu (**Workspace OSD → Settings**) or with the command:
 
 ```bash
 omarchy-shell shell call iesta.workspace-osd openSettings '{}'
 ```
 
-or from the Omarchy menu: **Workspace OSD → Settings**.
-
-Close the settings panel:
+Close it with:
 
 ```bash
 omarchy-shell shell call iesta.workspace-osd closeSettings '{}'
+```
+
+### Map it to a shortcut
+
+Bind the command in `~/.config/hypr/bindings.lua`, for example:
+
+```lua
+o.bind("SUPER + ALT + O", "Workspace OSD settings",
+  "omarchy-shell shell call iesta.workspace-osd openSettings '{}'")
 ```
 
 ## Configuration
@@ -75,7 +94,7 @@ restart).
 duration = 750        # ms the number stays on screen
 fade = 60             # fade-in duration, ms
 reopen = 0            # delay before re-opening on rapid workspace changes, ms
-size-multiplier = 8   # glyph size = base font size x N
+size-multiplier = 7   # glyph size = base font size x N
 opacity = 0.82        # card background opacity (only when border = true)
 shape = "rounded"     # rectangle | rounded | circle
 border = false        # false => no outline, transparent background
