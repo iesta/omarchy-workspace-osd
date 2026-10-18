@@ -14,6 +14,7 @@ var DEFAULTS = {
   sizeMultiplier: 7,
   opacity: 0.82,
   shape: "rounded",
+  roundness: 24,
   border: false
 }
 
@@ -58,6 +59,8 @@ function applyKey(out, key, value) {
     var s = String(value)
     if (SHAPES.indexOf(s) !== -1) out.shape = s
     break
+  case "roundness":
+    out.roundness = Math.round(clampNumber(value, 0, 200, DEFAULTS.roundness)); break
   case "border":
     out.border = (value === true || String(value) === "true")
     break
@@ -90,6 +93,7 @@ function serialize(prefs) {
   applyKey(p, "size-multiplier", prefs.sizeMultiplier)
   applyKey(p, "opacity", prefs.opacity)
   applyKey(p, "shape", prefs.shape)
+  applyKey(p, "roundness", prefs.roundness)
   applyKey(p, "border", prefs.border)
   return [
     "# Workspace OSD preferences (Omarchy). Managed by the plugin; safe to edit by hand.",
@@ -101,6 +105,7 @@ function serialize(prefs) {
     "size-multiplier = " + p.sizeMultiplier,
     "opacity = " + p.opacity,
     "shape = \"" + p.shape + "\"",
+    "roundness = " + p.roundness,
     "border = " + (p.border ? "true" : "false"),
     ""
   ].join("\n")

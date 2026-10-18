@@ -111,6 +111,7 @@ reopen = 0            # delay before re-opening on rapid workspace changes, ms
 size-multiplier = 7   # glyph size = base font size x N
 opacity = 0.82        # card background opacity (only when border = true)
 shape = "rounded"     # rectangle | rounded | circle
+roundness = 24        # corner radius in px (rounded shape only)
 border = false        # false => no outline, transparent background
 ```
 
@@ -122,6 +123,7 @@ border = false        # false => no outline, transparent background
 | `size-multiplier` | number | `7` | Glyph size multiplier |
 | `opacity` | number (0–1) | `0.82` | Card opacity (bordered only) |
 | `shape` | enum | `rounded` | `rectangle`, `rounded`, `circle` |
+| `roundness` | int (px) | `24` | Corner radius (rounded shape only) |
 | `border` | bool | `false` | Draw outline + card |
 
 ## Remove

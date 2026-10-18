@@ -167,6 +167,30 @@ Item {
             }
           }
 
+          Column {
+            width: parent.width
+            spacing: Style.spacing.xs
+            // Corner radius only applies to the "rounded" shape.
+            enabled: root.prefs.shape === "rounded"
+            opacity: root.prefs.shape === "rounded" ? 1 : 0.45
+
+            Text {
+              text: "Corner roundness " + Math.round(Number(root.prefs.roundness)) + " px"
+              color: Color.foreground
+              font.family: Style.font.resolvedFamily
+              font.pixelSize: Style.font.caption
+            }
+
+            PanelSlider {
+              width: parent.width
+              value: root.prefs.roundness
+              minimum: 0
+              maximum: 80
+              step: 1
+              onMoved: function (value) { root.changed("roundness", value) }
+            }
+          }
+
           Toggle {
             width: parent.width
             label: "Border"

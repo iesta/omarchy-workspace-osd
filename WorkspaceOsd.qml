@@ -77,9 +77,12 @@ Item {
   readonly property bool isCircle: root.prefs.shape === "circle"
   readonly property real cardWidth: root.isCircle ? Math.max(baseWidth, baseHeight) : baseWidth
   readonly property real cardHeight: root.isCircle ? Math.max(baseWidth, baseHeight) : baseHeight
-  readonly property real cardRadius: root.prefs.shape === "rectangle"
-    ? 0
-    : (root.isCircle ? root.cardWidth / 2 : Style.cornerRadius)
+  readonly property real cardRadius: {
+    if (root.prefs.shape === "rectangle") return 0
+    if (root.isCircle) return root.cardWidth / 2
+    // Rounded: user-tunable corner radius, capped so opposite corners never overlap.
+    return Math.min(root.prefs.roundness, root.cardWidth / 2, root.cardHeight / 2)
+  }
 
   Timer {
     id: hideTimer
