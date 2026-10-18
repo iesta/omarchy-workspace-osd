@@ -79,6 +79,20 @@ o.bind("SUPER + ALT + O", "Workspace OSD settings",
   "omarchy-shell shell call iesta.workspace-osd openSettings '{}'")
 ```
 
+### Add it to the Omarchy menu
+
+The plugin installs no menu entry of its own. To put a shortcut under
+**Setup → Config**, add one line to
+`~/.config/omarchy/extensions/omarchy-menu.jsonc` (the menu hot-reloads on save):
+
+```jsonc
+"setup.config.workspace-osd": {
+  "icon":"󰒓",
+  "label":"Workspace OSD",
+  "action":"omarchy-shell shell call iesta.workspace-osd openSettings '{}'"
+},
+```
+
 ## Configuration
 
 Preferences are stored in:
