@@ -10,8 +10,7 @@ from a settings panel: on-screen time, fade, size, opacity, **shape**
 
 ## Preview
 
-<!-- Add a preview.png at the repository root to have it picked up by the
-     Omarchy marketplace. A screenshot of the OSD on the desktop is ideal. -->
+![Workspace OSD — Rectangle, Rounded, Circle and the settings panel](preview.png)
 
 ## Features
 
