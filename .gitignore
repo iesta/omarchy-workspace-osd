@@ -2,6 +2,21 @@
 *.swp
 *~
 .DS_Store
+Thumbs.db
 
 # Plugin backups written by editors/agents
 *.bak.*
+*.orig
+*.rej
+
+# Local scratch / reference material — never part of the plugin
+inspiration/
+references/
+research/
+notes/
+scratch/
+todo*
+*.code-workspace
+
+# Local preview capture sources (preview.png is committed)
+/preview-src/
