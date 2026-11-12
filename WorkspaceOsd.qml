@@ -63,7 +63,6 @@ Item {
   function closeSettings() { root.settingsOpen = false }
 
   // ------------------------------------------------------ OSD state
-  readonly property int workspaceId: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id : 0
   property bool opened: false
   property string number: ""
 
@@ -102,15 +101,26 @@ Item {
     }
   }
 
-  function present() {
-    number = String(root.workspaceId)
+  function present(id) {
+    number = String(id)
     opened = false
     reopenTimer.restart()
   }
 
-  // Fires when the focused workspace changes (Hyprland connector keeps this
-  // property in sync with the compositor).
-  onWorkspaceIdChanged: root.present()
+  // Hyprland.focusedWorkspace follows the focused monitor, which follows the
+  // pointer even when follow_mouse is off (misc:mouse_move_focuses_monitor),
+  // so a binding on it flashed the OSD on mouseover. workspacev2 is emitted
+  // only when a user requests a workspace change (Hyprland IPC docs), never
+  // on mouse movements, so announce on that instead.
+  Connections {
+    target: Hyprland
+    function onRawEvent(event) {
+      if (String(event.name) === "workspacev2") {
+        var id = parseInt(String(event.data).split(",", 1)[0], 10)
+        if (!isNaN(id)) root.present(id)
+      }
+    }
+  }
 
   PanelWindow {
     id: panel
